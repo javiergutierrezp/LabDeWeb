@@ -2,7 +2,6 @@
 const credentials = require('./credentials.js')
 const request = require('request')
 
-const temp = require('./lab.js')
 
 const geocode = function(ciudad) {
 
@@ -14,17 +13,17 @@ const geocode = function(ciudad) {
       console.log(error)
     }
     else{
-      const data = response.body.features
+      const cords = response.body.features
 
-        if (data.response == 'False'){
-          callback(data.Error, undefined)
+        if (cords.response == 'False'){
+          callback(cords.Error, undefined)
         }
         else {
           const infoCiudad = {
-              lat: data[0].center[1],
-              long: data[0].center[0]
+              lat: cords[0].center[1],
+              long: cords[0].center[0]
           }
-          temp.retorna(infoCiudad.lat, infoCiudad.long)
+          retorna(infoCiudad.lat, infoCiudad.long)
         }
     }
 	})
@@ -39,16 +38,16 @@ const retorna = function(lat, longitud){
       console.log(error)
     }
     else {
-      const data = response.body
+      const report = response.body
 
-        if (data.response == 'False'){
-          callback(data.Error, undefined)
+        if (report.response == 'False'){
+          callback(report.Error, undefined)
         }
         else {
           const dataClima = {
-            estara : data.hourly.summary,
-              temp: data.currently.temperature,
-              prob: data.currently.precipProbability
+            estara : report.hourly.summary,
+              temp: report.currently.temperature,
+              prob: report.currently.precipProbability
           }
           console.log(dataClima.estara + ' Actualmente estamos a ' + dataClima.temp + ' C. Hay ' + dataClima.prob + '% de probabilidades de lluvia.')
         } 
@@ -57,4 +56,4 @@ const retorna = function(lat, longitud){
 }
 
 
-geocode('Monterrey')
+geocode('Uyuni')
