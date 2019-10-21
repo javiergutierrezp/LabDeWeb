@@ -1,0 +1,11 @@
+{
+  "name": "lab06",
+  "version": "1.0.0",
+  "description": "Weather app for Web class",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "JMGP",
+  "license": "ISC"
+}
